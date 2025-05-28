@@ -1,6 +1,5 @@
 package com.foodtimetest.direct_message;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class DirectMessageService {
 		dao = new DirectMessageDAOJDBC();
 	}
 
-	public DirectMessageVO addDm( Integer memId, Integer smgrId, String messContent,String messTime,Integer messDirection) {
+	public DirectMessageVO addDm( Integer memId, Integer smgrId, String messContent,java.sql.Timestamp messTime,Integer messDirection) {
 
 		DirectMessageVO dmVO = new DirectMessageVO();
 
@@ -27,7 +26,7 @@ public class DirectMessageService {
 		return dmVO;
 	}
 
-	public DirectMessageVO updateDm(Integer dmId, Integer memId,Integer smgrId, String messContent, String messTime, Integer messDirection)
+	public DirectMessageVO updateDm(Integer dmId, Integer memId,Integer smgrId, String messContent, Integer messDirection)
 {
 
 		DirectMessageVO dmVO = new DirectMessageVO();
@@ -36,7 +35,7 @@ public class DirectMessageService {
 		dmVO.setMemId(memId);
 		dmVO.setSmgrId(smgrId);
 		dmVO.setMessContent(messContent);
-		dmVO.setMessTime(messTime);
+//		dmVO.setMessTime(messTime);
 		dmVO.setMessDirection(messDirection);
 		dao.update(dmVO);
 

@@ -1,13 +1,13 @@
 package com.foodtimetest.direct_message.controller;
 import java.io.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
-	import jakarta.servlet.*;
-	import jakarta.servlet.annotation.WebServlet;
-	import jakarta.servlet.http.*;
-
-	import com.foodtimetest.direct_message.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
+import com.foodtimetest.direct_message.*;
 	@WebServlet(name = "directMessageServlet", urlPatterns = {"/directmessage/dm.do"})
 public class DirectMessageServlet extends HttpServlet{
 
@@ -116,7 +116,7 @@ public class DirectMessageServlet extends HttpServlet{
 				if (messContent == null || messContent.trim().length() == 0) {
 					errorMsgs.add("訊息內容: 請勿空白");
 				}
-				String messTime = req.getParameter("messTime");
+//				String messTime = req.getParameter("messTime");
 				Integer messDirection = Integer.valueOf(req.getParameter("messDirection"));
 				
 	            DirectMessageVO dmVO = new DirectMessageVO();
@@ -124,7 +124,7 @@ public class DirectMessageServlet extends HttpServlet{
 					dmVO.setMemId(memId);
 					dmVO.setSmgrId(smgrId);
 					dmVO.setMessContent(messContent);	
-					dmVO.setMessTime(messTime);
+//					dmVO.setMessTime(messTime);
 					dmVO.setMessDirection(messDirection);  
 		
 					// Send the use back to the form, if there were errors
@@ -138,7 +138,7 @@ public class DirectMessageServlet extends HttpServlet{
 					
 					/***************************2.開始修改資料*****************************************/
 					DirectMessageService dmSvc = new DirectMessageService();
-					dmVO = dmSvc.updateDm(dmId,memId,smgrId,messContent,messTime,messDirection);
+					dmVO = dmSvc.updateDm(dmId,memId,smgrId,messContent,messDirection);
 					
 					/***************************3.修改完成,準備轉交(Send the Success view)*************/
 					req.setAttribute("dmVO", dmVO); // 資料庫update成功後,正確的的empVO物件,存入req
@@ -156,7 +156,6 @@ public class DirectMessageServlet extends HttpServlet{
 
 					/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				
-//					Integer SmgId = Integer.valueOf(req.getParameter("SmgId").trim());
 //				Integer dmId = validateIntegerParameter(req, "dmId", errorMsgs, "訊息編號格式不正確");
 				Integer memId = validateIntegerParameter(req, "memId", errorMsgs, "會員編號格式不正確");
 	            Integer smgrId = validateIntegerParameter(req, "smgrId", errorMsgs, "管理員編號格式不正確");
@@ -164,7 +163,10 @@ public class DirectMessageServlet extends HttpServlet{
 				if (messContent == null || messContent.trim().length() == 0) {
 					errorMsgs.add("訊息內容: 請勿空白");
 				}
-				String messTime = req.getParameter("messTime");
+				java.sql.Timestamp messTime = new java.sql.Timestamp(System.currentTimeMillis());
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String formattedNow = formatter.format(messTime);
+				
 				Integer messDirection = Integer.valueOf(req.getParameter("messDirection"));
 				DirectMessageVO dmVO = new DirectMessageVO();
 //				dmVO.setDmId(dmId);

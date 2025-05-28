@@ -26,7 +26,7 @@ public class DirectMessageDAOJDBC implements DirectMessageDAO_interface {
 	private static final String GET_ONE = 
 			"SELECT DM_ID,MEM_ID,SMGR_ID,MESS_CONTENT,MESS_TIME,MESS_DIRECTION FROM DIRECT_MESSAGE where DM_ID=?";
 	private static final String UPDATE = 
-			"UPDATE DIRECT_MESSAGE set MEM_ID=?, SMGR_ID=?, MESS_CONTENT=?,MESS_TIME=?, MESS_DIRECTION=? where DM_ID = ?";
+			"UPDATE DIRECT_MESSAGE set MEM_ID=?, SMGR_ID=?, MESS_CONTENT=?, MESS_DIRECTION=? where DM_ID = ?";
 	private static final String DELETE = "DELETE FROM DIRECT_MESSAGE WHERE DM_ID=?";
 	public void insert(DirectMessageVO dmVO) {
 		Connection con = null;
@@ -41,7 +41,7 @@ public class DirectMessageDAOJDBC implements DirectMessageDAO_interface {
 			pstmt.setInt(1, dmVO.getMemId());
 			pstmt.setInt(2, dmVO.getSmgrId());
 			pstmt.setString(3, dmVO.getMessContent());
-			pstmt.setString(4, dmVO.getMessTime());
+			pstmt.setTimestamp(4, new java.sql.Timestamp(dmVO.getMessTime().getTime()));
 			pstmt.setInt(5, dmVO.getMessDirection());
 
 			pstmt.executeUpdate();
@@ -83,8 +83,7 @@ public class DirectMessageDAOJDBC implements DirectMessageDAO_interface {
 			pstmt.setInt(1, dmVO.getMemId());
 			pstmt.setInt(2, dmVO.getSmgrId());
 			pstmt.setString(3, dmVO.getMessContent());
-			pstmt.setString(4, dmVO.getMessTime());
-			pstmt.setInt(5, dmVO.getMessDirection());
+			pstmt.setTimestamp(4, new java.sql.Timestamp(dmVO.getMessTime().getTime()));
 			pstmt.setInt(6, dmVO.getDmId());
 			
 			pstmt.executeUpdate();
@@ -137,7 +136,7 @@ public class DirectMessageDAOJDBC implements DirectMessageDAO_interface {
 				dmVO.setMemId(rs.getInt("MEM_ID"));
 				dmVO.setSmgrId(rs.getInt("SMGR_ID"));
 				dmVO.setMessContent(rs.getString("MESS_CONTENT"));
-				dmVO.setMessTime(rs.getString("MESS_TIME"));
+				dmVO.setMessTime(rs.getTimestamp("MESS_TIME"));
 				dmVO.setMessDirection(rs.getInt("MESS_DIRECTION"));
 				dmVO.setDmId(rs.getInt("DM_ID"));
 			}
@@ -199,7 +198,7 @@ public class DirectMessageDAOJDBC implements DirectMessageDAO_interface {
 				dmVO.setMemId(rs.getInt("MEM_ID"));
 				dmVO.setSmgrId(rs.getInt("SMGR_ID"));
 				dmVO.setMessContent(rs.getString("MESS_CONTENT"));
-				dmVO.setMessTime(rs.getString("MESS_TIME"));
+				dmVO.setMessTime(rs.getTimestamp("MESS_TIME"));
 				dmVO.setMessDirection(rs.getInt("MESS_DIRECTION"));
 				dmVO.setDmId(rs.getInt("DM_ID"));;
 				list.add(dmVO); // Store the row in the list

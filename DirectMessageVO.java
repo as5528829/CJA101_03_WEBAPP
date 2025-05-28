@@ -9,7 +9,7 @@ public class DirectMessageVO implements Serializable{
 	private Integer memId;
 	private Integer smgrId;
 	private String messContent;
-	private String messTime;
+	private java.sql.Timestamp messTime;
 	private Integer messDirection;
 	public Integer getDmId() {
 		return dmId;
@@ -35,11 +35,11 @@ public class DirectMessageVO implements Serializable{
 	public void setMessContent(String messContent) {
 		this.messContent = messContent;
 	}
-	public String getMessTime() {
+	public java.sql.Timestamp getMessTime() {
 		return messTime;
 	}
-	public void setMessTime(String messTime) {
-		this.messTime = messTime;
+	public void setMessTime(java.sql.Timestamp messTime2) {
+		this.messTime = messTime2;
 	}
 	public Integer getMessDirection() {
 		return messDirection;
