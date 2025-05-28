@@ -65,7 +65,7 @@
 		<th>會員編號</th>
 		<th>管理員編號</th>
 		<th>訊息內容</th>
-<!-- 		<th>訊息時間</th> -->
+		<th>訊息時間</th>
 		<th>訊息方向</th>
 		<th>狀態</th>
 		<th>刪除</th>
@@ -78,7 +78,7 @@
 			<td>${dmVO.memId}</td>
 			<td>${dmVO.smgrId}</td>
 			<td>${dmVO.messContent}</td>
-<%-- 			<td>${dmVO.messTime}</td> --%>
+			<td>${dmVO.messTime}</td>
 			<td>${dmVO.messDirection}</td> 
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/directmessage/dm.do" style="margin-bottom: 0px;">

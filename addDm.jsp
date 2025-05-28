@@ -85,6 +85,10 @@
 		<td><input type="TEXT" name="messContent"   value="<%= (dmVO==null)? "你好" : dmVO.getMessContent()%>" size="45"/></td>
 	</tr>
 	
+	<tr>
+		<td>訊息時間:</td>
+		<td><input type="datetime-local" id="todayDate" step="1"></td>
+	</tr>
 
 	<tr>
 		<td>訊息方向</td>
@@ -127,6 +131,10 @@
 </style>
 
 <script>
+let today = new Date();
+today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+document.getElementById('todayDate').value = today.toISOString().slice(0, 19);  // 第13行的當天日期
+
 //         $.datetimepicker.setLocale('zh');
 //         $('#f_date1').datetimepicker({
 // 	       theme: '',              //theme: 'dark',
